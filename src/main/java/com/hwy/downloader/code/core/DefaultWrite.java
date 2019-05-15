@@ -12,6 +12,7 @@ public class DefaultWrite implements Writer {
     private int writeIndex;
     private static final int  START_INDEX = 1;
     private CompleteListen completeListen;
+    private boolean isNewFile = true;
     private ExecutorService es = Executors.newSingleThreadExecutor();
     public DefaultWrite(Container container){
         this.container = container;
@@ -53,11 +54,14 @@ public class DefaultWrite implements Writer {
     }
 
     private void writeToFile(Chapter chapter) throws IOException {
-        File file = new File("/home/huangwenyong/book.txt");
-        if(file.exists()){
-            file.delete();
+        File file = new File("D:/book.txt");
+        if(isNewFile){
+            if(file.exists()){
+                file.delete();
+            }
+            file.createNewFile();
+            isNewFile = false;
         }
-        file.createNewFile();
         try (BufferedWriter writer = new BufferedWriter(
                 new OutputStreamWriter(new FileOutputStream(file, true)))){
             StringBuffer stringBuffer = new StringBuffer();
