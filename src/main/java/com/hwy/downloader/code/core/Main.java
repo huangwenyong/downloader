@@ -5,7 +5,7 @@ import java.util.Date;
 public class Main {
     public static void main(String[] args) {
         long startTime = new Date().getTime();
-        Downloader downloader = new Downloader("http://www.quanshuwang.com/book/0/269");
+        Downloader downloader = new Downloader("http://www.shuquge.com/txt/6356/index.html");
         try {
             downloader.setDocumentHandler(new QuanshuDocumnetHandler()).init().downloadChapter();
             Writer writer = new DefaultWrite(downloader.getContainer());
